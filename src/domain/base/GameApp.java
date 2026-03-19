@@ -11,6 +11,4 @@ public interface GameApp
 	// run 이라는 메소드를 보유해야하며
 	// run 메소드를 실행했을때 게임 로직이 실행되어야 한다.
 	void run();
-	
-	// test
 }
