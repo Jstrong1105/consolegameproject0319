@@ -1,5 +1,9 @@
 package main;
 
+import domain.base.GameApp;
+import domain.minesweeper.MinesweeperApp;
+import domain.minesweeper.MinesweeperOption;
+
 /**
  * 
  * @author SIST111
@@ -10,6 +14,8 @@ public class Launcher
 {
 	public static void main(String[] args)
 	{
-		System.out.println("구현중입니다.");
+		GameApp game = new MinesweeperApp(new MinesweeperOption());
+		
+		game.run();
 	}
 }

@@ -1,9 +1,7 @@
 package domain.minesweeper;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
-import java.util.stream.IntStream;
 
 /**
  * 지뢰찾기에서 보드판을 담당하는 클래스
@@ -24,13 +22,16 @@ class CellBoard
 
 	private int openCellCount;
 	
+	private final CellPrinter printer;
+	
 	// 생성자
 	// 패키지 프라이빗
-	CellBoard(int size, int mineCount)
+	CellBoard(int size, int mineCount,CellPrinter printer)
 	{
 		this.size = size;
 		totalCell = size * size;
 		this.mineCount = mineCount;
+		this.printer = printer;
 		board = new Cell[size][size];
 		openCellCount = 0;
 		
@@ -78,6 +79,12 @@ class CellBoard
 		}
 	}
 	
+	// 화면 출력
+	void print()
+	{
+		printer.print(board);
+	}
+	
 	// 파라미터 값이 보드판의 범위 안에 존재하는지 확인하는 메소드
 	private boolean isValid(int row, int col)
 	{
@@ -85,7 +92,7 @@ class CellBoard
 	}
 	
 	// 파라미터 값이 보드판의 범위를 벗어나서 예외를 던지는 래퍼 메소드
-	private void isOutOfArray(int row, int col)
+	private void checkOutOfArray(int row, int col)
 	{
 		if(!isValid(row,col))
 		{
@@ -96,7 +103,7 @@ class CellBoard
 	// 지뢰 여부 반환
 	boolean isMine(int row, int col)
 	{
-		isOutOfArray(row,col);
+		checkOutOfArray(row,col);
 		
 		return board[row][col].isMine();
 	}
@@ -104,7 +111,7 @@ class CellBoard
 	// 깃발 여부 반환
 	boolean isFlag(int row, int col)
 	{
-		isOutOfArray(row,col);
+		checkOutOfArray(row,col);
 		
 		return board[row][col].isFlagged();
 	}
@@ -112,7 +119,7 @@ class CellBoard
 	// 오픈 여부 반환
 	boolean isOpen(int row, int col)
 	{
-		isOutOfArray(row, col);
+		checkOutOfArray(row, col);
 		
 		return board[row][col].isOpen();
 	}
@@ -120,15 +127,30 @@ class CellBoard
 	// 닫힘 여부 반환
 	boolean isClosed(int row, int col)
 	{
-		isOutOfArray(row, col);
+		checkOutOfArray(row, col);
 		
 		return board[row][col].isClosed();
+	}
+	
+	// 선택하기
+	void cellChoice(int row, int col)
+	{
+		checkOutOfArray(row, col);
+		
+		board[row][col].setChoice(true);
+	}
+	
+	void cellCancle(int row, int col)
+	{
+		checkOutOfArray(row, col);
+		
+		board[row][col].setChoice(false);
 	}
 	
 	// 첫 입력 처리
 	void openFirst(int row, int col)
 	{
-		isOutOfArray(row, col);
+		checkOutOfArray(row, col);
 		
 		// 만약 처음 고른 칸이 지뢰라면
 		// 지뢰가 아닌 칸을 랜덤하게 뽑아서
@@ -187,7 +209,7 @@ class CellBoard
 	// 오픈하기
 	void openCell(int row, int col)
 	{
-		isOutOfArray(row, col);
+		checkOutOfArray(row, col);
 		
 		if(!isClosed(row, col))
 		{
@@ -236,7 +258,7 @@ class CellBoard
 	// 깃발 설치
 	void flagToggle(int row, int col)
 	{
-		isOutOfArray(row, col);
+		checkOutOfArray(row, col);
 		
 		if(isOpen(row, col))
 		{
@@ -257,8 +279,18 @@ class CellBoard
 		// 위의 방법은 상당히 우아한 방법 이긴 합니다만 ...
 		// 매번 모든 보드판을 순회하면서 체크하기 때문에
 		// 메모리 관점에서 손해 같습니다. 물론 현재 컴퓨팅 환경에서 유의미한 수준은 아닙니다만....
-		
 		return (totalCell-mineCount) <= openCellCount;
+	}
+	
+	void openAll()
+	{
+		for(int r = 0; r < size; r++)
+		{
+			for(int c = 0; c < size; c++)
+			{
+				board[r][c].openAll();
+			}
+		}
 	}
 }
 

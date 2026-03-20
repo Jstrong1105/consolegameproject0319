@@ -27,7 +27,7 @@ public final class InputUtil
 	{
 		try
 		{
-			System.out.println(prompt);
+			System.out.print(prompt);
 			BR.readLine();
 		} 
 		catch (IOException e)
@@ -45,7 +45,16 @@ public final class InputUtil
 		try
 		{
 			System.out.print(prompt + " : ");
-			return BR.readLine();
+			String str = BR.readLine();
+			
+			if(str.equals("exit"))
+			{
+				System.exit(1);
+				
+				return null;
+			}
+			
+			return str;
 		}
 		catch (IOException e)
 		{
@@ -106,7 +115,7 @@ public final class InputUtil
 	{
 		while(true)
 		{
-			String answer = readString(prompt).trim();
+			String answer = readString(prompt + " (" + y + "/" + n + ")").trim();
 			
 			if(answer.equalsIgnoreCase(y))
 			{

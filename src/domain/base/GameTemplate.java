@@ -15,12 +15,12 @@ public abstract class GameTemplate implements GameApp
 		do 
 		{
 			initialize();
-			isRunning = true;
+			startGame();
 			
 			while(isRunning)
 			{
 				render();
-				inputHandle();
+				handleInput();
 				update();
 			}
 			
@@ -37,11 +37,21 @@ public abstract class GameTemplate implements GameApp
 		return InputUtil.readBool("다시 시작하시겠습니까?", "y", "n");
 	}
 	
+	protected void startGame()
+	{
+		isRunning = true;
+	}
+	
 	// 게임이 종료되었을때 하위 클래스에서 실행하는 메소드
 	// 아마도 update 에서 실행하겠죠
 	protected void endGame()
 	{
 		isRunning = false;
+	}
+	
+	protected boolean isRunning()
+	{
+		return isRunning;
 	}
 	
 	/*
@@ -58,7 +68,7 @@ public abstract class GameTemplate implements GameApp
 	/*
 	 * 사용자의 입력을 받는 메소드
 	 */
-	protected abstract void inputHandle();
+	protected abstract void handleInput();
 	
 	/*
 	 * 사용자의 입력이나 기타 요소등을 게임에 반영하는 메소드

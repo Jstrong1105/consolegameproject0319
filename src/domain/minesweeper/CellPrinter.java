@@ -7,10 +7,23 @@ package domain.minesweeper;
  */
 interface CellPrinter
 {
-	void print();
+	int getPlayerNumber();
 	
-	public static String MINE_SHAPE = "※";
-	public static String FLAG_SHAPE = "P";
-	public static String CLOSE_SHAPE = "■";
-	public static String[] OPEN_SHAPE = {"□","①","②","③","④","⑤","⑥","⑦","⑧"};
+	String endMsg(int playerNumber);
+	
+	void print(Cell[][] board);
+	
+	public static final String MINE_SHAPE = "※";
+	public static final String FLAG_SHAPE = "P";
+	public static final String CLOSE_SHAPE = "■";
+	
+	public static final String COLOR_GREEN = "\u001B[92m"; 
+	public static final String COLOR_YELLOW = "\u001B[93m";
+	public static final String COLOR_RED = "\u001B[91m";
+	
+	public static final String BG_YELLOW = "\u001B[103m";
+	
+	public static final String RESET = "\u001B[0m";
+	
+	public static final String[] OPEN_SHAPE = {"□","①","②","③","④","⑤","⑥","⑦","⑧"};
 }

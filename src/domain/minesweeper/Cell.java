@@ -15,7 +15,10 @@ class Cell
 	}
 	
 	// 속성 구성
-	private boolean mine;			// 지뢰 여부
+	private boolean mine;			// 지뢰 여부	
+	// 사용자가 처음 입력한 칸이 지뢰라면 해당 지뢰를 다른 곳으로 옮기는 로직 때문에
+	// final 속성을 적용하지 않았음
+	
 	private int adjacentMines; 		// 인접한 지뢰의 개수
 	private CellStatus status;		// 셀의 상태
 	private boolean choice;			// 선택된 셀 여부 (사용자가 선택한 셀의 색상을 다르게 표현해서 가시성 개선)
@@ -76,7 +79,7 @@ class Cell
 	// 게임이 종료되어서 모든 칸을 개방해 주는 메소드
 	// 별다른 조건 없이 모든 칸을 OPEN 으로 바꾼다.
 	// 해당 메소드는 게임이 종료되기 전에는 실행되면 안된다.
-	void endingOpen()
+	void openAll()
 	{
 		if(status != CellStatus.OPEN)
 		{
