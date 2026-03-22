@@ -7,7 +7,7 @@ import util.InputUtil;
 /**
  * 지뢰찾기 구체화 클래스
  */
-public class MinesweeperApp extends GameTemplate
+class MinesweeperApp extends GameTemplate
 {
 	// run 메소드 재구성
 	@Override

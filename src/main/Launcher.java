@@ -1,8 +1,6 @@
 package main;
 
-import domain.base.GameApp;
-import domain.minesweeper.MinesweeperApp;
-import domain.minesweeper.MinesweeperOption;
+import util.MenuUtil;
 
 /**
  * 
@@ -14,8 +12,6 @@ public class Launcher
 {
 	public static void main(String[] args)
 	{
-		GameApp game = new MinesweeperApp(new MinesweeperOption());
-		
-		game.run();
+		MenuUtil.titleMenu(GameList.values(), 1, "게임 목록");
 	}
 }
