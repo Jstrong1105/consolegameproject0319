@@ -1,5 +1,8 @@
 package domain.minesweeper;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import domain.base.GameTemplate;
 import util.ConsoleUtil;
 import util.InputUtil;
@@ -45,6 +48,8 @@ class MinesweeperApp extends GameTemplate
 	
 	private CellBoard board;
 	
+	private Instant startTime;
+	
 	// 생성자
 	public MinesweeperApp(MinesweeperOption option)
 	{
@@ -63,6 +68,8 @@ class MinesweeperApp extends GameTemplate
 		playerCol = -1;
 		first = true;
 		chanceCount = 5;
+		
+		startTime = Instant.now();
 		
 		// 지뢰의 개수는 전체 개수의 10% * 가중치
 		board = new CellBoard(size, (totalCell/10)*weight, printer);
@@ -217,6 +224,7 @@ class MinesweeperApp extends GameTemplate
 		if(win)
 		{
 			System.out.println("축하합니다. 모든 지뢰를 찾았습니다.");
+			System.out.println("클리어 타임 : " + Duration.between(startTime, Instant.now()).getSeconds() + " 초");
 		}
 		else
 		{

@@ -33,8 +33,6 @@ public final class InputUtil
 		catch (IOException e)
 		{
 			throw new RuntimeException("입력 스트림 에러 발생",e);
-			// 발생할 일 없음
-			// 아마도
 		}
 	}
 	
@@ -47,6 +45,8 @@ public final class InputUtil
 			System.out.print(prompt + " : ");
 			String str = BR.readLine();
 			
+			// 테스트 과정에서
+			// 종료를 위한 임시 코드
 			if(str.equals("exit"))
 			{
 				System.exit(1);

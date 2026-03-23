@@ -1,6 +1,7 @@
 package main;
 
 import domain.base.GameMenu;
+import domain.memorygame.MemoryGameGetter;
 import domain.minesweeper.MinesweeperGetter;
 
 /**
@@ -8,7 +9,8 @@ import domain.minesweeper.MinesweeperGetter;
  */
 public enum GameOptionList implements GameMenu<Integer>
 {
-	MINESWEEPER("지뢰찾기","폭탄이 아닌 칸을 전부 여세요!",MinesweeperGetter::setOption)
+	MINESWEEPER("지뢰찾기","폭탄이 아닌 칸을 전부 여세요!",MinesweeperGetter::setOption),
+	MEMORYGAME("메모리 게임","같은 카드를 맞추세요!",MemoryGameGetter::setOption)
 	;
 
 	private final String name;

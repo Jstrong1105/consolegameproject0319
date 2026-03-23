@@ -43,7 +43,7 @@ public abstract class GameTemplate implements GameApp
 	}
 	
 	// 게임이 종료되었을때 하위 클래스에서 실행하는 메소드
-	// 아마도 update 에서 실행하겠죠
+	// update 에서 실행함
 	protected void endGame()
 	{
 		isRunning = false;

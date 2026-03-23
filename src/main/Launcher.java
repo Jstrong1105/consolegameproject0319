@@ -12,6 +12,6 @@ public class Launcher
 {
 	public static void main(String[] args)
 	{
-		MenuUtil.titleMenu(GameList.values(), 1, "게임 목록");
+		MenuUtil.titleMenu(GameList.values(), 1, "게임목록");
 	}
 }

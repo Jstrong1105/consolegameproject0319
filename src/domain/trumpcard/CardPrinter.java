@@ -13,17 +13,36 @@ public final class CardPrinter
 	
 	public static void print(List<Card> handCard)
 	{
-		System.out.println("┌────┐ ".repeat(handCard.size()));
+		System.out.println("┌─────┐ ".repeat(handCard.size()));
 		
 		for(Card card : handCard)
 		{
-			System.out.printf("│  %s  │ ",card.getShape());
-		}
-		for(Card card : handCard)
-		{
-			System.out.printf("│  %s  │ ",numberShape[card.getNumber()-1]);
+			if(card.isOpen())
+			{
+				System.out.printf("│  %s  │ ",card.getShape());
+			}
+			else
+			{
+				System.out.printf("│  %s  │ ","?");
+			}
 		}
 		
-		System.out.print("└────┘ ".repeat(handCard.size()));
+		System.out.println();
+		
+		for(Card card : handCard)
+		{
+			if(card.isOpen())
+			{
+				System.out.printf("│  %s  │ ",numberShape[card.getNumber()-2]);
+			}
+			else
+			{
+				System.out.printf("│  %s  │ ","?");
+			}
+		}
+		
+		System.out.println();
+		
+		System.out.print("└─────┘ ".repeat(handCard.size()));
 	}
 }

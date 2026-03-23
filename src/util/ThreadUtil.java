@@ -33,7 +33,7 @@ public final class ThreadUtil
 		{
 			while(second > 0)
 			{
-				System.out.printf("\r%d초 남았습니다.",second);
+				System.out.printf("\r%2d초 남았습니다.",second);
 				Thread.sleep(1000);
 				second--;
 			}
