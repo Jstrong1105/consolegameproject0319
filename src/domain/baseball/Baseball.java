@@ -13,7 +13,7 @@ public class Baseball implements GameApp{
 	private GameOption option;					// 공 갯수와 난이도 설정값, 선공 여부가 담길 option
 	private String correctNumber;				// 정답 숫자가 담길 correctNumber
 	String userBalls;							// 유저 입력값 userBalls
-
+	CpuAI cpu;
 
     @Override
     public void run()		//GameApp의 run() 메소드를 상속받음
@@ -27,7 +27,7 @@ public class Baseball implements GameApp{
 			initialize();
 			
 			// 옵션값에 따른 컴퓨터 객체 생성
-            CpuAI cpu = new CpuAI(option);
+            cpu = new CpuAI(option);
 
 			// 옵션에 따른 정답값 초기화
 			correctNumber = Judge.madeCorrect(option.getBallCount());
@@ -74,6 +74,9 @@ public class Baseball implements GameApp{
 		}
     }
 
+
+
+	
 	private void play(String userBalls)
 	{
 		RoundRecord rr = Judge.check(correctNumber, userBalls);
@@ -81,8 +84,10 @@ public class Baseball implements GameApp{
 			// 기록 저장 및 출력
 			record.add(rr);
 			rr.printRecord();
-
-			// 3. 종료 체크 (예: 4스트라이크)
+			
+			// 레코드 값을 토대로 스트라이크와 볼의 갯수를 구하자..
+			
+			// 종료 체크 다른곳에 뺄 수 없을까?
 			if (rr.getResult().equals(option.getBallCount() + "S0B")) 
 			{ 
 				System.out.println("\n4 스트라이크! 게임 종료!");
