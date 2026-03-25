@@ -14,10 +14,8 @@ public class GameOptionManager
         int ballCount = InputUtil.readInt("공 갯수", 4, 6);
         String level;
 
-        System.out.println("첫번째");
         while(true)
         {   
-            System.out.println("1");
             // 입력값 검사
             level = InputUtil.readString("난이도(상, 중, 하)");
                    System.out.println(level);

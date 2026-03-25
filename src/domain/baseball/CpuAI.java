@@ -54,6 +54,8 @@ public class CpuAI
         // 기록의 n번째부터 전체까지 읽어와서 리턴
         return record.subList(record.size()-memory, record.size());
 
+
+
     }
 
   
@@ -74,7 +76,7 @@ public class CpuAI
 
 
     // 기록을 토대로 답을 도출하는 함수
-    public String cpuPlay(ArrayList<RoundRecord> record, String correctNumber)
+    public String cpuPlay(ArrayList<RoundRecord> record)
     {
         // int countS = 0;
         // int countB = 0;
@@ -82,40 +84,46 @@ public class CpuAI
         // double container = 0;
 
         String result = "";
-
+        
         // 컴퓨터가 읽은 기억을 가져와서...
         List<RoundRecord> cpuMemory = readMemory(record);
 
-        // 메모리에 저장되어있는 요소를 순회하는데
-        // 우선 요소 하나의 결과값을 얻어오자...
-        for (RoundRecord r : cpuMemory) {
-            
-            while (true) {
-                // 랜덤하게 얻어온 결과값을 cpuBalls에 담음
-                String cpuBalls = Judge.madeCorrect(option.getBallCount());
-                
-                // 비교용 변수 str에 메모리 하나의 숫자값을 담음(ex 1234)
-                String str = r.getBalls();
+
+        while (true) {
+
+            // 랜덤하게 얻어온 결과값을 cpuBalls에 담음
+            String cpuBalls = Judge.madeCorrect(option.getBallCount());
+               
+            // 조건문 탈출용 플래그
+            boolean flag = true;
+
+            // 메모리에 저장되어있는 요소를 순회하는데
+            // 우선 요소 하나의 결과값을 얻어오자...
+            for (RoundRecord r : cpuMemory) {
                 
                 // 만약 컴퓨터가 랜덤하게 던진 공이 정답이라면 > 여기서 기록들 꺼내와서 컴퓨터가 던진 값으로 정답을 돌림
-                if (cpuBalls.equals(correctNumber)) {
-                    
-
-                    
-
+                // 체크 메소드에서 정답을 cpuBalls로 설정 후 결과값을 가져온 후 
+                // 그 문자열이 요소 하나의 기록과 같은지 확인한다!
+                String maybeCorrect = Judge.check(cpuBalls, r.getBalls()).getResult();
+                
+                if (!maybeCorrect.equals(r.getResult())) {
+                    flag = false;
+                    break;
                 }
-
-
-
-
-
-
+                    
             }
+            // 조건문 탈출했다면
+            // cpuBalls가 조건에 만족하는 값
+            if(flag)
+            {
+                result = cpuBalls;
+                break;
+            }
+        }
+        // cpuBalls 반환
+        return result;
+    }
             
-            
-            
-            
-
 
             // 1. 처음 생각했던 방안 --------------------------------------------------
             
@@ -139,25 +147,6 @@ public class CpuAI
             //     continue;
             // }
             // ------------------------------------------------------------------------
-            
-
-
-
-
-
-
-
-        }
-
-        return result;
-    }
-
-    			
-		
-    
-
-
-
 
 }
     

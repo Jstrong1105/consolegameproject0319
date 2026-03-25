@@ -35,10 +35,10 @@ public class Baseball implements GameApp{
 			
 
 			while(isRun)
-			{	
-				userBalls = userInput();
-				play(userBalls);
-				cpuBalls = 
+			{	//선공을 정해서 매개변수로 넘기는데... 흠 여긴 좀 맘에 안드는데...
+				//매개변수 이름이 맘에 안들지만... 일단 선공 누군지 정해서 넘긴다.	
+				String first = option.isFirst() ? "USER" : "CPU";
+				play(first);
 
 			}
             
@@ -77,33 +77,81 @@ public class Baseball implements GameApp{
 		}
     }
 
-	
-
-	
-	private void play()
+	// 플레이 메소드는 플레이만
+	// 선, 후공 매개변수로 받음
+	private void play(String first)
 	{
-		// 유저와 컴퓨터 입력값을 체크함
-		RoundRecord ur = Judge.check(correctNumber, userBalls);
-		RoundRecord cr = Judge.check(correctNumber, cpuBalls);
-
-		// cpu에게 기록과 정답(비교용)을 넘김
-		cpu.cpuPlay(record, correctNumber);
-			// 기록 저장 및 출력
-			record.add(ur);
-			record.add(cr);
-
-			ur.printRecord();
-			
-			
-
-
-			// 종료 체크 다른곳에 뺄 수 없을까?
-			if (ur.getResult().equals(option.getBallCount() + "S0B")) 
-			{ 
-				System.out.println("\n4 스트라이크! 게임 종료!");
-				isRun = false;
-			}
-
+		// 선공이 유저라면 유저 먼저, 아니면 CPU 먼저
+    	if (first.equals("USER")) 
+		{
+        	userPlay();
+			System.out.println("==================================");
+			// 만약 게임이 안끝났으면
+			if (isRun)
+			{	 
+				// cpu 턴
+				cpuPlay();
+			}	
+    	} 
+		
+		else 
+		{
+        	cpuPlay();
+			System.out.println("==================================");
+			// 만약 게임이 안끝났으면
+			if (isRun)
+			{	 
+				// 유저 턴
+				userPlay();
+			}	
+    	}
 	}
+	
+	// 사용자 로직
+	private void userPlay() 
+	{
+		// 사용자가 던진 공
+    	userBalls = userInput();
+
+		// 유저의 레코드를 공통 레코드 record에 add함
+    	RoundRecord ur = Judge.check(correctNumber, userBalls);
+    	record.add(ur);
+
+		// 판정값 출력
+    	ur.printRecord();
+
+		// 종료 조건 체크
+    	checkWin(ur, "USER");
+	}
+
+	// 컴퓨터 로직
+	private void cpuPlay() 
+	{
+		// 컴퓨터는 레코드를 토대로 정답을 도출해야하기때문에 매개변수를 받음
+		cpuBalls = cpu.cpuPlay(record);
+
+		// cpu의 레코드를 공통 레코드 record에 add함
+		RoundRecord cr = Judge.check(correctNumber, cpuBalls);
+		record.add(cr);
+
+		// 판정값 출력
+		cr.printRecord();
+
+		// 종료 조건 체크
+		checkWin(cr, "CPU");
+	}
+
+	// 승리 조건 체크, 종료
+	private void checkWin(RoundRecord rr, String player) 
+	{
+		// 얻어낸 사용자/ 컴퓨터 기록이 볼 갯수 + S라면(EX: 4S)
+    	if (rr.getResult().equals(option.getBallCount() + "S0B")) 
+		{
+			// 출력 후 isRun false로 초기화(종료)
+        	System.out.println(player + "승리~!!");
+        	isRun = false;
+    	}
+	}
+
 
 }
