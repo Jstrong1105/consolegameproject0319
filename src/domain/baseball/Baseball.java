@@ -13,6 +13,7 @@ public class Baseball implements GameApp{
 	private GameOption option;					// 공 갯수와 난이도 설정값, 선공 여부가 담길 option
 	private String correctNumber;				// 정답 숫자가 담길 correctNumber
 	String userBalls;							// 유저 입력값 userBalls
+	String cpuBalls;							// 컴퓨터가 내뱉은 값 cpuBalls
 	CpuAI cpu;
 
     @Override
@@ -31,12 +32,14 @@ public class Baseball implements GameApp{
 
 			// 옵션에 따른 정답값 초기화
 			correctNumber = Judge.madeCorrect(option.getBallCount());
-
+			
 
 			while(isRun)
 			{	
 				userBalls = userInput();
 				play(userBalls);
+				cpuBalls = 
+
 			}
             
         } while (InputUtil.readBool("다시시작?", "y", "n"));
@@ -74,21 +77,28 @@ public class Baseball implements GameApp{
 		}
     }
 
-
+	
 
 	
-	private void play(String userBalls)
+	private void play()
 	{
-		RoundRecord rr = Judge.check(correctNumber, userBalls);
-			
+		// 유저와 컴퓨터 입력값을 체크함
+		RoundRecord ur = Judge.check(correctNumber, userBalls);
+		RoundRecord cr = Judge.check(correctNumber, cpuBalls);
+
+		// cpu에게 기록과 정답(비교용)을 넘김
+		cpu.cpuPlay(record, correctNumber);
 			// 기록 저장 및 출력
-			record.add(rr);
-			rr.printRecord();
+			record.add(ur);
+			record.add(cr);
+
+			ur.printRecord();
 			
-			// 레코드 값을 토대로 스트라이크와 볼의 갯수를 구하자..
 			
+
+
 			// 종료 체크 다른곳에 뺄 수 없을까?
-			if (rr.getResult().equals(option.getBallCount() + "S0B")) 
+			if (ur.getResult().equals(option.getBallCount() + "S0B")) 
 			{ 
 				System.out.println("\n4 스트라이크! 게임 종료!");
 				isRun = false;

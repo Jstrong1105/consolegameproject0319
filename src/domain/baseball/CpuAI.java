@@ -8,9 +8,10 @@ public class CpuAI
 {
     private GameOption option;
     // 컴퓨터가 볼과 스트라이크의 우선 순위를 판단하기 위한 변수 
-    private double s_value = 2.1 ;
-    private double b_value = 1;
-    private String[] shuffleArr;
+
+    // private double s_value = 2.1 ;
+    // private double b_value = 1;
+    // private String[] shuffleArr;
 
     // 정답의 경우의 수가 담길 correctList
     // private List<String> correctList = new ArrayList<String>();
@@ -34,7 +35,7 @@ public class CpuAI
         // 공의 갯수 사이즈의 배열 생성...
         // 이 배열은 나중에 특정 조건에 만족할 시
         // 값을 섞기 위한 배열임...
-        shuffleArr = new String[option.getBallCount()];
+        // shuffleArr = new String[option.getBallCount()];
     }
 
     // 난이도별로 읽어올 데이터 갯수를 정하고 읽어오는 readMemory 함수
@@ -73,12 +74,12 @@ public class CpuAI
 
 
     // 기록을 토대로 답을 도출하는 함수
-    public String cpuPlay(ArrayList<RoundRecord> record)
+    public String cpuPlay(ArrayList<RoundRecord> record, String correctNumber)
     {
-        int countS = 0;
-        int countB = 0;
-        double totalValue = 0;
-        double container = 0;
+        // int countS = 0;
+        // int countB = 0;
+        // double totalValue = 0;
+        // double container = 0;
 
         String result = "";
 
@@ -89,29 +90,58 @@ public class CpuAI
         // 우선 요소 하나의 결과값을 얻어오자...
         for (RoundRecord r : cpuMemory) {
             
-            
-            // 요소의 result와 balls를 담기 위한 변수
-            // j_result, j_balls
-            String j_result = "";
-            String j_balls = "";
-            
-            // 얻어온 결과값의 첫번째 요소와 세번째 요소 (EX : 1S3B  → 1과 3)
-            countS = Character.getNumericValue(j_result.charAt(0));
-            countB = Character.getNumericValue(j_result.charAt(2));
-            
-            // totalValue 중 가장 높은값을 컨테이너에 담아둠
-            // 그 result와 balls도 같이 담음
-            totalValue = (countS * s_value) + (countB * b_value);
-            container = totalValue;
-            j_balls = r.getBalls();
-            j_result = r.getResult();
+            while (true) {
+                // 랜덤하게 얻어온 결과값을 cpuBalls에 담음
+                String cpuBalls = Judge.madeCorrect(option.getBallCount());
+                
+                // 비교용 변수 str에 메모리 하나의 숫자값을 담음(ex 1234)
+                String str = r.getBalls();
+                
+                // 만약 컴퓨터가 랜덤하게 던진 공이 정답이라면 > 여기서 기록들 꺼내와서 컴퓨터가 던진 값으로 정답을 돌림
+                if (cpuBalls.equals(correctNumber)) {
+                    
 
-            if (container> totalValue) {
-                continue;
+                    
+
+                }
+
+
+
+
+
+
             }
             
             
             
+            
+
+
+            // 1. 처음 생각했던 방안 --------------------------------------------------
+            
+            // 요소의 result와 balls를 담기 위한 변수
+            // j_result, j_balls
+            // String j_result = "";
+            // String j_balls = "";
+            
+            // // 얻어온 결과값의 첫번째 요소와 세번째 요소 (EX : 1S3B  → 1과 3)
+            // countS = Character.getNumericValue(j_result.charAt(0));
+            // countB = Character.getNumericValue(j_result.charAt(2));
+            
+            // totalValue 중 가장 높은값을 컨테이너에 담아둠
+            // 그 result와 balls도 같이 담음
+            // totalValue = (countS * s_value) + (countB * b_value);
+            // container = totalValue;
+            // j_balls = r.getBalls();
+            // j_result = r.getResult();
+
+            // if (container> totalValue) {
+            //     continue;
+            // }
+            // ------------------------------------------------------------------------
+            
+
+
 
 
 
