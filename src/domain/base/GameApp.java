@@ -3,7 +3,7 @@ package domain.base;
 /**
  * 
  * @author SIST111
- * 모든 게임이 상속받아야 하는 인터페이스
+ * 모든 게임이 구현 하는 인터페이스
  */
 public interface GameApp
 {

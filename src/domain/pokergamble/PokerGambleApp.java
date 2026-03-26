@@ -1,6 +1,7 @@
 package domain.pokergamble;
 
 import domain.base.GameTemplate;
+import domain.trumpcard.Card;
 import domain.trumpcard.CardDeck;
 import util.ConsoleUtil;
 import util.InputUtil;
@@ -10,6 +11,8 @@ import util.InputUtil;
  */
 class PokerGambleApp extends GameTemplate
 {
+	private final int basicBet = 10;
+	
 	private final int[] levelPercent = {3,2,1}; 
 	
 	private final int level;
@@ -59,11 +62,23 @@ class PokerGambleApp extends GameTemplate
 		
 		cpuCard.openCard(0);
 		cpuCard.openCard(1);
+		
+		if(playerCoin > basicBet)
+		{
+			playerCoin -= basicBet;
+			totalBetCoin += basicBet;
+		}
+		else
+		{
+			totalBetCoin += playerCoin;
+			playerCoin = 0;
+		}
 	}
 	
 	@Override
 	protected void render()
 	{
+		ConsoleUtil.clear();
 		cpuCard.print();
 		System.out.println(" 컴퓨터 카드");
 		playerCard.print();
@@ -71,6 +86,7 @@ class PokerGambleApp extends GameTemplate
 		System.out.println("목표 코인 : " + target);
 		System.out.println("현재 베팅 : " + totalBetCoin);
 		System.out.println("남은 코인 : " + playerCoin);
+		System.out.println("남은 카드 : " + (mode - playerCard.getCount()) + "장");
 	}
 
 	@Override
@@ -92,7 +108,7 @@ class PokerGambleApp extends GameTemplate
 		else if(playerCard.getCount() >= mode)
 		{
 			playerResult = playerCard.getResult();
-			cpuResult = playerCard.getResult();
+			cpuResult = cpuCard.getResult();
 			
 			int result = playerResult.compareTo(cpuResult);
 			
@@ -100,10 +116,12 @@ class PokerGambleApp extends GameTemplate
 			{
 				finish(Result.WIN);
 			}
+			
 			else if(result < 0)
 			{
 				finish(Result.LOSE);
 			}
+			
 			else
 			{
 				finish(Result.DRAW);
@@ -127,32 +145,33 @@ class PokerGambleApp extends GameTemplate
 			cpuCard.openCard(i);
 		}
 		
-		ConsoleUtil.clear();
-		cpuCard.print();
-		cpuResult.getName();
-		
-		System.out.println();
-		
-		playerCard.print();
-		playerResult.getName();
+		if(result != Result.FOLD)
+		{
+			ConsoleUtil.clear();
+			cpuCard.print();
+			System.out.println(cpuResult.getName());
+			
+			playerCard.print();
+			System.out.println(playerResult.getName());
+		}
 		
 		if(result == Result.WIN)
 		{
 			playerCoin += totalBetCoin * 2 * weight;
-			InputUtil.pause("WIN!");
+			InputUtil.pause("당신 WIN!");
 		}
 		else if(result == Result.DRAW)
 		{
 			playerCoin += totalBetCoin;
-			InputUtil.pause("DRAW");
+			InputUtil.pause("당신 DRAW");
 		}
 		else if(result == Result.FOLD)
 		{
-			InputUtil.pause("FOLD");
+			InputUtil.pause("당신 FOLD");
 		}
 		else if(result == Result.LOSE)
 		{
-			InputUtil.pause("LOSE");
+			InputUtil.pause("당신 LOSE");
 		}
 		
 		if(playerCoin >= target)
@@ -174,7 +193,9 @@ class PokerGambleApp extends GameTemplate
 	// 카드 나눠주기
 	private void drawCard()
 	{
-		playerCard.drawCard(cardDeck.drawCard());
+		Card card = cardDeck.drawCard();
+		card.openCard();
+		playerCard.drawCard(card);
 		cpuCard.drawCard(cardDeck.drawCard());
 	}
 }

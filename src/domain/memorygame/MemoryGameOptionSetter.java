@@ -2,13 +2,13 @@ package domain.memorygame;
 
 import java.util.function.Consumer;
 
-import domain.base.GameMenu;
+import domain.base.OptionMenu;
 import util.InputUtil;
 
 /**
  * 메모리 게임 옵션 수정
  */
-enum MemoryGameOptionSetter implements GameMenu<MemoryGameOption>
+enum MemoryGameOptionSetter implements OptionMenu<MemoryGameOption>
 {
 	SIZE("사이즈","다른 카드의 개수를 결정합니다",(option)->
 	{

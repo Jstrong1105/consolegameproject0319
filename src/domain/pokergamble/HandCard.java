@@ -50,6 +50,8 @@ class HandCard
 	// 결과 반환하기
 	PokerRankingResult getResult()
 	{
-		return null;
+		HandCardEvaluator eval = new HandCardEvaluator();
+		
+		return eval.getResult(handCard);
 	}
 }

@@ -17,6 +17,19 @@ class PokerRankingResult implements Comparable<PokerRankingResult>
 		kicker = new ArrayList<Integer>();
 	}
 	
+	static PokerRankingResult royalFlush() { return new PokerRankingResult(PokerRankingList.ROYAL_FLUSH); }
+	static PokerRankingResult straightFlush() { return new PokerRankingResult(PokerRankingList.STRAIGHT_FLUSH); }
+	static PokerRankingResult fourOfAKind() { return new PokerRankingResult(PokerRankingList.FOUR_OF_A_KIND); }
+	static PokerRankingResult fullHouse() { return new PokerRankingResult(PokerRankingList.FULL_HOUSE); }
+	static PokerRankingResult flush() { return new PokerRankingResult(PokerRankingList.FLUSH); }
+	static PokerRankingResult mountain() { return new PokerRankingResult(PokerRankingList.MOUNTAIN); }
+	static PokerRankingResult straight() { return new PokerRankingResult(PokerRankingList.STRAIGHT); }
+	static PokerRankingResult backStraight() { return new PokerRankingResult(PokerRankingList.BACK_STRAIGHT); }
+	static PokerRankingResult threeOfAKind() { return new PokerRankingResult(PokerRankingList.THREE_OF_A_KIND); }
+	static PokerRankingResult twoPair() { return new PokerRankingResult(PokerRankingList.TWO_PAIR); }
+	static PokerRankingResult onePair() { return new PokerRankingResult(PokerRankingList.ONE_PAIR); }
+	static PokerRankingResult highCard() { return new PokerRankingResult(PokerRankingList.HIGH_CARD); }
+	
 	String getName()
 	{
 		return result.getName();

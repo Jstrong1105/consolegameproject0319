@@ -70,9 +70,9 @@ class Cell
 		{
 			status = CellStatus.FLAGGED;
 		}
-		else if(status == CellStatus.CLOSED)
+		else if(status == CellStatus.FLAGGED)
 		{
-			status = CellStatus.FLAGGED;
+			status = CellStatus.CLOSED;
 		}
 	}
 	

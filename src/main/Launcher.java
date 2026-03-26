@@ -1,7 +1,5 @@
 package main;
 
-import util.MenuUtil;
-
 /**
  * 
  * @author SIST111
@@ -12,6 +10,6 @@ public class Launcher
 {
 	public static void main(String[] args)
 	{
-		MenuUtil.titleMenu(GameList.values(), 1, "게임목록");
+		TitleMenuList.titleMenu(GameList.values(),GameOptionList.values(),"게임목록");
 	}
 }

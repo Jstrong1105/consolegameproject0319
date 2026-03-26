@@ -65,9 +65,13 @@ public class Card
 	public void hiddenCard(){status = CardStatus.HIDDEN;}
 	
 	// 복제하기
+	// 숫자와 모양만 복사하고
+	// 상태는 복사하지 않음
 	public Card copy(){return new Card(shape,number);}
 	
 	// 오버라이딩
+	// 숫자와 모양이 같다면 상태와 관계 없이
+	// 동일 한 카드로 취급한다
 	@Override
 	public boolean equals(Object o)
 	{

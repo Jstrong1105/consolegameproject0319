@@ -11,8 +11,10 @@ import domain.trumpcard.Card.CardShape;
  */
 public class CardDeck
 {
+	// 카드 52장을 들고 있는 카드덱
 	List<Card> cardDeck;
 	
+	// 생성자
 	public CardDeck()
 	{
 		init();
@@ -53,20 +55,13 @@ public class CardDeck
 		return cardDeck.remove(cardDeck.size()-1);
 	}
 	
-	// 테스트를 위한 임시 메소드
-	public Card getCard(int shape,int number)
-	{
-		// 임시 메소드임
-		// 샤프가 1 ~ 4 사이 
-		// 넘버가 2 ~ 14 사이가 아니라면 에러남
-		switch (shape)
-		{
-			case 1: return new Card(CardShape.SPADE,number);
-			case 2: return new Card(CardShape.HEART,number);
-			case 3: return new Card(CardShape.DIA,number);
-			case 4: return new Card(CardShape.CLUB,number);
-		}
-		
-		return null;
-	}
+	/*
+	 * // 테스트를 위한 임시 메소드 public Card getCard(int shape,int number) { // 임시 메소드임 //
+	 * 샤프가 1 ~ 4 사이 // 넘버가 2 ~ 14 사이가 아니라면 에러남 switch (shape) { case 1: return new
+	 * Card(CardShape.SPADE,number); case 2: return new
+	 * Card(CardShape.HEART,number); case 3: return new Card(CardShape.DIA,number);
+	 * case 4: return new Card(CardShape.CLUB,number); }
+	 * 
+	 * return null; }
+	 */
 }

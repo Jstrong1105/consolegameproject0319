@@ -1,26 +1,28 @@
 package main;
 
-import domain.base.GameMenu;
+import domain.base.TitleMenu;
 import domain.memorygame.MemoryGameGetter;
 import domain.minesweeper.MinesweeperGetter;
+import domain.pokergamble.PokerGambleGetter;
 
 /**
  * 게임 옵션 수정
  */
-public enum GameOptionList implements GameMenu<Integer>
+public enum GameOptionList implements TitleMenu
 {
 	MINESWEEPER("지뢰찾기","폭탄이 아닌 칸을 전부 여세요!",MinesweeperGetter::setOption),
-	MEMORYGAME("메모리 게임","같은 카드를 맞추세요!",MemoryGameGetter::setOption)
+	MEMORYGAME("메모리게임","같은 카드를 맞추세요!",MemoryGameGetter::setOption),
+	POKERGAMBLE("포커겜블","목표 코인을 달성하세요!",PokerGambleGetter::setOption)
 	;
 
 	private final String name;
-	private final String exlpain;
+	private final String explain;
 	private final Runnable run;
 	
-	private GameOptionList(String name, String exlpain, Runnable run)
+	private GameOptionList(String name, String explain, Runnable run)
 	{
 		this.name = name;
-		this.exlpain = exlpain;
+		this.explain = explain;
 		this.run = run;
 	}
 	
@@ -33,11 +35,11 @@ public enum GameOptionList implements GameMenu<Integer>
 	@Override
 	public String getExplain()
 	{
-		return exlpain;
+		return explain;
 	}
 
 	@Override
-	public void run(Integer option)
+	public void run()
 	{
 		run.run();
 	}

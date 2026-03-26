@@ -2,11 +2,11 @@ package domain.pokergamble;
 
 import java.util.function.Consumer;
 
-import domain.base.GameMenu;
+import domain.base.OptionMenu;
 import domain.pokergamble.PokerGambleOption.PokerMode;
 import util.InputUtil;
 
-enum PokerGambleOptionSetter implements GameMenu<PokerGambleOption>
+enum PokerGambleOptionSetter implements OptionMenu<PokerGambleOption>
 {
 	LEVEL("난이도","시작 코인의 비율을 결정합니다",(option)->
 	{
@@ -23,7 +23,7 @@ enum PokerGambleOptionSetter implements GameMenu<PokerGambleOption>
 		int weight = InputUtil.readInt("변경할 배율을 입력",option.getMinWeight(),option.getMaxWeight());
 		option.setWeight(weight);
 	}),
-	MODE("설정","카드의 장 수를 결정합니다",(option)->
+	MODE("모드","카드의 장 수를 결정합니다",(option)->
 	{
 		int mode = InputUtil.readInt("1. 5포커 / 2. 7포커",1,2);
 		if(mode == 1)
@@ -64,5 +64,6 @@ enum PokerGambleOptionSetter implements GameMenu<PokerGambleOption>
 	public void run(PokerGambleOption option)
 	{
 		setter.accept(option);
+		InputUtil.pause("옵션이 변경되었습니다");
 	}
 }

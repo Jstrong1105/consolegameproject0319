@@ -2,13 +2,13 @@ package domain.minesweeper;
 
 import java.util.function.Consumer;
 
-import domain.base.GameMenu;
+import domain.base.OptionMenu;
 import util.InputUtil;
 
 /**
  * 지뢰찾기 옵션 수정 리스트
  */
-enum MinesweeperOptionSetter implements GameMenu<MinesweeperOption>
+enum MinesweeperOptionSetter implements OptionMenu<MinesweeperOption>
 {
 	SIZE("사이즈","보드판의 가로,세로 사이즈",(option)->
 	{
@@ -22,18 +22,15 @@ enum MinesweeperOptionSetter implements GameMenu<MinesweeperOption>
 	}),
 	PRINTER("프린터","출력 타입을 결정합니다.",(option)->
 	{
-		int type = InputUtil.readInt("1. 숫자 / 2. 모양",1,2);
+		int type = InputUtil.readInt("1. 숫자 / 2. 모양 (미구현)",1,1);
 		if(type == 1)
-		{
-			option.setPrinter(new CellPrinter1());
-		}
-		else
 		{
 			option.setPrinter(new CellPrinter1());
 		}
 	})
 	;
 	
+	// 생성자
 	MinesweeperOptionSetter(String name, String explain, Consumer<MinesweeperOption> setter)
 	{
 		this.name = name;

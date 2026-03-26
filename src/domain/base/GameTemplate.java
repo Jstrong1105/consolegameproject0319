@@ -17,7 +17,7 @@ public abstract class GameTemplate implements GameApp
 			initialize();
 			startGame();
 			
-			while(isRunning)
+			while(isRunning())
 			{
 				render();
 				handleInput();

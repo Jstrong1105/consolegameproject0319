@@ -1,9 +1,10 @@
 package domain.base;
 
 /**
- * 화면에 출력할 메뉴들이 구현해야하는 메소드 
+ * 옵션 메뉴들이 구현해야하는 인터페이스
+ * util/menuUtil/optionMenu.java 에서 활용함
  */
-public interface GameMenu<T>
+public interface OptionMenu<T>
 {
 	String getName();		// 이름
 	String getExplain();	// 설명

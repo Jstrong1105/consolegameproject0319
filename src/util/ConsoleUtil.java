@@ -11,7 +11,6 @@ public final class ConsoleUtil
 	// 모든 메소드 static
 	private ConsoleUtil() {}
 	
-	
 	// 콘솔 창을 지우는 명령어
 	public static void clear()
 	{

@@ -57,7 +57,7 @@ class MemoryBoard
 	// 열린 카드 인지 확인
 	boolean isOpen(int index)
 	{
-		if(index < 0 || index > boardCard.size())
+		if(index < 0 || index >= boardCard.size())
 		{
 			throw new IllegalArgumentException("잘못된 인덱스 입니다.");
 		}
@@ -68,7 +68,7 @@ class MemoryBoard
 	// 오픈하기
 	void openCard(int index)
 	{
-		if(index < 0 || index > boardCard.size())
+		if(index < 0 || index >= boardCard.size())
 		{
 			throw new IllegalArgumentException("잘못된 인덱스 입니다.");
 		}
@@ -79,7 +79,7 @@ class MemoryBoard
 	// 숨기기
 	void hiddenCard(int index)
 	{
-		if(index < 0 || index > boardCard.size())
+		if(index < 0 || index >= boardCard.size())
 		{
 			throw new IllegalArgumentException("잘못된 인덱스 입니다.");
 		}

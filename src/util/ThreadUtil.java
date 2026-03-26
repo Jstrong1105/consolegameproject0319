@@ -15,6 +15,11 @@ public final class ThreadUtil
 	// 시간을 밀리초 (0.001) 초 단위로 받아서 그 시간 만큼 프로그램을 정지 시키는 메소드
 	public static void sleep(long milliSecond)
 	{
+		if(milliSecond < 0)
+		{
+			return;
+		}
+		
 		try
 		{
 			Thread.sleep(milliSecond);
@@ -29,6 +34,11 @@ public final class ThreadUtil
 	// 남은 시간을 1초 단위로 출력해주는 메소드
 	public static void sleepCountDown(int second)
 	{
+		if(second < 0)
+		{
+			return;
+		}
+		
 		try
 		{
 			while(second > 0)
