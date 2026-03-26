@@ -27,14 +27,12 @@ public final class InputUtil
 	{
 		try
 		{
-			System.out.println(prompt);
+			System.out.print(prompt);
 			BR.readLine();
 		} 
 		catch (IOException e)
 		{
 			throw new RuntimeException("입력 스트림 에러 발생",e);
-			// 발생할 일 없음
-			// 아마도
 		}
 	}
 	
@@ -45,7 +43,23 @@ public final class InputUtil
 		try
 		{
 			System.out.print(prompt + " : ");
-			return BR.readLine();
+			String str = BR.readLine();
+			
+			if(str == null)
+			{
+				return "";
+			}
+			
+			// 테스트 과정에서
+			// 종료를 위한 임시 코드
+			if(str.equals("exit"))
+			{
+				System.exit(0);
+				
+				return null;
+			}
+			
+			return str;
 		}
 		catch (IOException e)
 		{
@@ -102,23 +116,23 @@ public final class InputUtil
 	// 해당하는 값이 아닌 값을 입력한다면 경고 출력 이후 무한 트라이
 	// 안내 메시지는 자동으로 조합해준다.
 	// 대소문자를 구분하지 않고 공백을 무시한다.
-	public static boolean readBool(String prompt, String y, String n)
+	public static boolean readBool(String prompt, String trueValue, String falseValue)
 	{
 		while(true)
 		{
-			String answer = readString(prompt).trim();
+			String answer = readString(prompt + " (" + trueValue + "/" + falseValue + ")").trim();
 			
-			if(answer.equalsIgnoreCase(y))
+			if(answer.equalsIgnoreCase(trueValue))
 			{
 				return true;
 			}
-			else if(answer.equalsIgnoreCase(n))
+			else if(answer.equalsIgnoreCase(falseValue))
 			{
 				return false;
 			}
 			else
 			{
-				System.out.println(y + " 또는 " + n + " 만 입력해주세요.");
+				System.out.println(trueValue + " 또는 " + falseValue + " 만 입력해주세요.");
 			}
 		}
 	}
