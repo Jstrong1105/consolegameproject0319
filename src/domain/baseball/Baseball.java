@@ -1,7 +1,9 @@
 package domain.baseball;
 
+import java.io.Console;
 import java.util.ArrayList;
 import domain.base.GameApp;
+import util.ConsoleUtil;
 import util.InputUtil;
 
 // GameApp 인터페이스를 상속받음
@@ -33,11 +35,15 @@ public class Baseball implements GameApp{
 			// 옵션에 따른 정답값 초기화
 			correctNumber = Judge.madeCorrect(option.getBallCount());
 			
+			int part = 0;
 
 			while(isRun)
 			{	//선공을 정해서 매개변수로 넘기는데... 흠 여긴 좀 맘에 안드는데...
 				//매개변수 이름이 맘에 안들지만... 일단 선공 누군지 정해서 넘긴다.	
 				String first = option.isFirst() ? "USER" : "CPU";
+				++part;
+
+				System.out.println("\n=================" + part + "회차=========================");
 				play(first);
 
 			}
@@ -49,6 +55,7 @@ public class Baseball implements GameApp{
 	// 초기화를 담당하는 initialize
 	private void initialize()
 	{
+		ConsoleUtil.clear();
 		isRun = true;
 		record = new ArrayList<>();
 	}
@@ -85,7 +92,6 @@ public class Baseball implements GameApp{
     	if (first.equals("USER")) 
 		{
         	userPlay();
-			System.out.println("==================================");
 			// 만약 게임이 안끝났으면
 			if (isRun)
 			{	 
@@ -97,7 +103,6 @@ public class Baseball implements GameApp{
 		else 
 		{
         	cpuPlay();
-			System.out.println("==================================");
 			// 만약 게임이 안끝났으면
 			if (isRun)
 			{	 
@@ -118,7 +123,7 @@ public class Baseball implements GameApp{
     	record.add(ur);
 
 		// 판정값 출력
-    	ur.printRecord();
+    	ur.printRecord("USER");
 
 		// 종료 조건 체크
     	checkWin(ur, "USER");
@@ -135,7 +140,7 @@ public class Baseball implements GameApp{
 		record.add(cr);
 
 		// 판정값 출력
-		cr.printRecord();
+		cr.printRecord("CPU");
 
 		// 종료 조건 체크
 		checkWin(cr, "CPU");

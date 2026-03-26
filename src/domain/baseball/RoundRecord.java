@@ -23,9 +23,9 @@ public class RoundRecord{
     }
 
     // 입력한 값에 대한 결과를 출력하는 메소드
-    public void printRecord()
+    public void printRecord(String str)
     {
-        System.out.printf("입력 : %s, 결과 : %s\n", balls, result);
+        System.out.printf(str + " 입력 : %s, 결과 : %s\n", balls, result);
     }
  
 }

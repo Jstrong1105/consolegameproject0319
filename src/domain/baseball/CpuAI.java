@@ -42,20 +42,23 @@ public class CpuAI
     private List<RoundRecord> readMemory(ArrayList<RoundRecord> record)
     {
         int memory = 0;
-
         // 난이도 상이면 전체 리스트 다 읽어옴
         if(option.getLevel().equals("상"))
+        {
             memory = record.size();
+        } 
         else if(option.getLevel().equals("중"))
             memory = 5;
         else
             memory = 3;
 
+        if(record.size() < memory)
+        {
+            return record.subList(0,record.size());
+        } 
+        
         // 기록의 n번째부터 전체까지 읽어와서 리턴
-        return record.subList(record.size()-memory, record.size());
-
-
-
+        return record.subList(record.size()-memory, record.size());  
     }
 
   
@@ -85,6 +88,7 @@ public class CpuAI
 
         String result = "";
         
+
         // 컴퓨터가 읽은 기억을 가져와서...
         List<RoundRecord> cpuMemory = readMemory(record);
 

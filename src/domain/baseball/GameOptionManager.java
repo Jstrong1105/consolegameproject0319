@@ -18,7 +18,6 @@ public class GameOptionManager
         {   
             // 입력값 검사
             level = InputUtil.readString("난이도(상, 중, 하)");
-                   System.out.println(level);
 
             if(level.equals("상") || level.equals("중") || level.equals("하"))
                 break;
