@@ -1,8 +1,7 @@
 package main;
 
 import domain.base.GameApp;
-import domain.minesweeper.MinesweeperApp;
-import domain.minesweeper.MinesweeperOption;
+
 
 /**
  * 
@@ -12,10 +11,5 @@ import domain.minesweeper.MinesweeperOption;
  */
 public class Launcher
 {
-	public static void main(String[] args)
-	{
-		GameApp game = new MinesweeperApp(new MinesweeperOption());
-		
-		game.run();
-	}
+
 }
