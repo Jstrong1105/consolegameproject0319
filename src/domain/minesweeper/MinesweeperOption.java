@@ -3,7 +3,7 @@ package domain.minesweeper;
 /**
  * 지뢰찾기 옵션 객체
  */
-public class MinesweeperOption
+class MinesweeperOption
 {
 	// 사이즈
 	private static final int MIN_SIZE = 10;

@@ -1,8 +1,5 @@
 package main;
 
-import domain.base.GameApp;
-
-
 /**
  * 
  * @author SIST111
@@ -11,5 +8,8 @@ import domain.base.GameApp;
  */
 public class Launcher
 {
-
+	public static void main(String[] args)
+	{
+		TitleMenuList.titleMenu(GameList.values(),GameOptionList.values(),"게임목록");
+	}
 }

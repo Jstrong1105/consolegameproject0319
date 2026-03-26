@@ -11,6 +11,7 @@ import java.util.Stack;
 class CellBoard
 {
 	// 상수
+	// 주변 8방향을 탐색할때 사용할 방향 상수
 	private static final int[] ROW_DIRECTIONS = {-1,-1,-1,0,0,1,1,1};
 	private static final int[] COL_DIRECTIONS = {-1,0,1,-1,1,-1,0,1};
 	
@@ -20,9 +21,9 @@ class CellBoard
 	private final int mineCount;	// 지뢰의 개수
 	private final Cell[][] board;	// 보드판 객체
 
-	private int openCellCount;
+	private int openCellCount;		// 오픈한 셀의 개수 (클리어 여부 확인때 사용)
 	
-	private final CellPrinter printer;
+	private final CellPrinter printer;	// 콘솔창에 출력하는 녀석
 	
 	// 생성자
 	// 패키지 프라이빗
@@ -33,7 +34,6 @@ class CellBoard
 		this.mineCount = mineCount;
 		this.printer = printer;
 		board = new Cell[size][size];
-		openCellCount = 0;
 		
 		init();
 	}
@@ -41,6 +41,8 @@ class CellBoard
 	// 초기화
 	private void init()
 	{
+		openCellCount = 0;
+		
 		for(int row = 0; row < size; row++)
 		{
 			for(int col = 0; col < size; col++)
@@ -63,6 +65,8 @@ class CellBoard
 		
 		Random rd = new Random();
 		
+		// 지뢰가 절반 이상인지 여부에 따라 배치 로직을 역전시킴
+		// 일반 -> 지뢰 or 지뢰 -> 일반
 		if( (totalCell/2) > mineCount) 
 		{
 			rd.ints(0,totalCell)
@@ -133,14 +137,15 @@ class CellBoard
 	}
 	
 	// 선택하기
-	void cellChoice(int row, int col)
+	void choiceCell(int row, int col)
 	{
 		checkOutOfArray(row, col);
 		
 		board[row][col].setChoice(true);
 	}
 	
-	void cellCancle(int row, int col)
+	// 선택 취소하기
+	void cancleCell(int row, int col)
 	{
 		checkOutOfArray(row, col);
 		
@@ -174,7 +179,10 @@ class CellBoard
 				}
 			}
 		}
-
+		
+		// 인접 지뢰의 수는 플레이어가 처음 한칸을 오픈 한 이후에 계산하기 때문에 (그때 확정되기 때문에)
+		// 첫 오픈을 하기전에 찬스나 깃발 등은 사용하지 못하게 해야한다.
+		
 		// 모든 칸을 순회하면서
 		// 지뢰인 셀을 발견하면
 		// 해당 셀 주변 8칸을
@@ -256,7 +264,7 @@ class CellBoard
 	}
 	
 	// 깃발 설치
-	void flagToggle(int row, int col)
+	void toggleFlag(int row, int col)
 	{
 		checkOutOfArray(row, col);
 		
@@ -278,10 +286,11 @@ class CellBoard
 		 */
 		// 위의 방법은 상당히 우아한 방법 이긴 합니다만 ...
 		// 매번 모든 보드판을 순회하면서 체크하기 때문에
-		// 메모리 관점에서 손해 같습니다. 물론 현재 컴퓨팅 환경에서 유의미한 수준은 아닙니다만....
+		// 메모리 관점에서 손해를 봅니다. 물론 현대 컴퓨팅 환경에서 유의미한 수준은 아닙니다만....
 		return (totalCell-mineCount) <= openCellCount;
 	}
 	
+	// 게임 종료시 실행되는 메소드
 	void openAll()
 	{
 		for(int r = 0; r < size; r++)

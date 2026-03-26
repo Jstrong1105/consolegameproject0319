@@ -33,6 +33,11 @@ class CellPrinter1 implements CellPrinter
 	@Override
 	public void print(Cell[][] board)
 	{
+		// 상당히 노가다 스러운 작업인데
+		// 콘솔창에 출력하는 상황이라 다소 어쩔수 없기도 한데
+		// 중복을 줄이려면 줄일수는 있겠지만....
+		// web 환경으로 넘어가기 전에 콘솔창에서 구현해보는 단계니까
+		// 이 부분을 너무 신경쓰지는 않겠습니다
 		size = board.length;
 		
 		System.out.print("==".repeat(size));

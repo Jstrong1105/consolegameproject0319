@@ -11,12 +11,10 @@ public final class ConsoleUtil
 	// 모든 메소드 static
 	private ConsoleUtil() {}
 	
-	
 	// 콘솔 창을 지우는 명령어
 	public static void clear()
 	{
 		System.out.print("\033[H\033[2J\033[3J");
 		System.out.flush();
-		
 	}
 }
